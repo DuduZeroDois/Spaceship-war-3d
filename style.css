@@ -1,0 +1,85 @@
+*{
+    margin: 0;
+    padding: 0;
+    
+}
+body{
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(180deg, #316FA6 0%, #527f9b 50%, #395b79 100%);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+canvas{
+    display: block;
+}
+h1{
+    color: rgb(255, 0, 0);
+    font-size: 60px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#hud{
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    font-size: 25px;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    z-index: 2;
+}
+#sc{
+    color: lime;
+}
+#lf{
+    color: darkred;
+}
+#telas{
+    margin-left: 40%;
+    margin-top: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    height: 200px;
+    background-color: rgb(255, 255, 255);
+    border: 3px solid blue;
+    border-radius: 8px;
+    font-size: 50px;
+    display: none;
+    z-index: 6;
+}
+#h2D{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: darkred;
+    display: none;
+}
+#resetD{
+    background-color: rgb(0, 149, 255);
+    font-size: 20px;
+    border-radius: 5px;
+    margin-left: 80px;
+    width: 80px;
+    display: none;
+}
+#resetD:hover{
+    background-color:  rgb(94, 188, 255);
+}
+#h2W{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: lime;
+    display: none;
+}
+#resetW{
+    background-color: rgb(0, 149, 255);
+    font-size: 20px;;
+    border-radius: 5px;
+    margin-left: 80px;
+    width: 80px;
+    display: none;
+}
+#resetW:hover{
+    background-color:  rgb(94, 188, 255);
+}
