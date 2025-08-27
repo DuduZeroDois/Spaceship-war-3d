@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpaceShip War 3D v1.0</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>SpaceShip War 3D v1.0</h1>
+    <div id="hud">
+        <h3>Score: <span id="ponto">0</span></h3>
+        <h3>Lifes: <span id="vida">10</span></h3>
+    </div>
+    <div id="telas">
+        <div id="perdeu">
+            <h2 id="h2D">DEFEAT</h2>
+            <button onclick="Reset()" id="resetD">Reset</button>
+        </div>
+        <div id="ganhou">
+            <h2 id="h2W">WINNER</h2>
+            <button onclick="Reset()" id="resetW">Reset</button>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
