@@ -4,6 +4,7 @@ const lf = document.getElementById("vida")
 const gameOver = document.getElementById("perdeu")
 const Win = document.getElementById("ganhou")
 const restart = document.getElementsByClassName("Reset")
+const telas = document.getElementById("telas")
 let pontosL = 0
 let lfL = 10
 let GameOver = false
@@ -33,11 +34,11 @@ Cena.add(Nave)
 //criar balas
 let balas = []
 function CriarBala() {
-    if (gameOver) {
+    if (GameOver) {
         return
     }
     const BalaGEO = new THREE.BoxGeometry(0.1, 0.3, 0.1)// w, h, profundida
-    const BalaMat = new THREE.MeshStandartMaterial({color:0xFFE900})
+    const BalaMat = new THREE.MeshStandardMaterial({color:0xFFE900})
     const Bala = new THREE.Mesh(BalaGEO, BalaMat)
     Bala.position.set(Nave.position.x, Nave.position.y + 0.5, Nave.position.z)
     Cena.add(Bala)
@@ -78,6 +79,25 @@ document.addEventListener("keydown", (e)=> {
 })
 document.addEventListener("keyup", (e)=> teclas[e.key] = false)
 
+//function reset
+function reniciar() {
+    GameOver = false
+    pontosL = 0
+    lfL = 10
+    lf.textContent = lfL
+    pontos.textContent = pontosL
+    balas.forEach(bala => Cena.remove(bala));
+    balas = []
+    inimigos.forEach(inimigo => Cena.remove(inimigo));
+    CriarI()
+    Nave.position.x = 0
+    Nave.position.y = -3
+    telas.style.display = "none"
+    Win.style.display = "none"
+    gameOver.style.display = "none"
+    Anima()
+}
+
 //checar se deu GameOver
 function checkGameOver() {
     for (let inimigo of inimigos) {
@@ -86,6 +106,40 @@ function checkGameOver() {
     }
     return lfL <= 0
 }}
+
+//bala explode
+function explodir(inimigo) {
+    for (let i = 0; i < 8; i++) {
+        const partGEO = new THREE.SphereGeometry(0.15)
+        const partMAT = new THREE.MeshStandardMaterial({color: 0xEBFF00})
+        const part = new THREE.Mesh(partGEO, partMAT)
+        part.position.copy(inimigo.position)
+        Cena.add(part)
+        const partDIR = new THREE.Vector3(
+            (Math.random() -0.5) *2, (Math.random() -0.5) *2, (Math.random() -0.5) *2
+        )
+        let lftp = 0
+        const partANI = ()=> {
+            if (lftp > 30) {
+                Cena.remove(part)
+                return
+            }
+            part.position.add(partDIR)
+            lftp++
+            requestAnimationFrame(partANI)
+        }
+        partANI()
+    }
+    let tam = 1
+    const interval = setInterval(()=> {
+        tam += 0.15
+        inimigo.scale.set(tam, tam, tam)
+        if (tam > 1.5) {
+            clearInterval(interval)
+            Cena.remove(inimigo)
+        }
+    }, 31)
+}
 
 //animação
 function Anima() {
@@ -116,6 +170,7 @@ function Anima() {
             inimigos.splice(index, 1)
             if (inimigos.length === 0 && !GameOver) {
                 GameOver = true
+                telas.style.display = "flex"
                 Win.style.display = "flex"
                 return
             }
@@ -128,6 +183,7 @@ function Anima() {
     //checkGameOver
     if (checkGameOver()) {
         GameOver = true
+        telas.style.display = "flex"
         gameOver.style.display = "flex"
         return
     }
@@ -145,4 +201,6 @@ function Anima() {
 
     Render.render(Cena, Camera)
 }
+restart.onclick = ()=> reniciar()
+restart.onclick = ()=> console.log("foi")
 Anima()
