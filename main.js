@@ -10,6 +10,33 @@ let lfL = 10
 let GameOver = false
 
 
+//sons
+const AudioCTX = new (window.AudioContext || window.webkitAudioContext)()
+function tocarSom (frequencia, duracao){
+    const oscilador = AudioCTX.createOscillator()
+    const gameNode = AudioCTX.createGain()
+    oscilador.connect(gameNode)
+    gameNode.connect(AudioCTX.destination)
+    oscilador.type = "square"
+    oscilador.frequency.setValueAtTime(frequencia, AudioCTX.currentTime)
+    oscilador.start()
+    gameNode.gain.exponentialRampToValueAtTime(0.0001, AudioCTX.currentTime + duracao)
+    oscilador.stop(AudioCTX.currentTime + duracao)
+}
+function st() {
+    tocarSom(1000, 0.1)
+}
+function se() {
+    tocarSom(200, 0.3)
+}
+function sgm() {
+    tocarSom(150, 0.6)
+    setTimeout(() => {
+        tocarSom(130, 0.6)    
+    }, 600);
+}
+
+
 //criar cena
 const Cena = new THREE.Scene()
 Cena.background = new THREE.Color(0x000000)
@@ -43,6 +70,7 @@ function CriarBala() {
     Bala.position.set(Nave.position.x, Nave.position.y + 0.5, Nave.position.z)
     Cena.add(Bala)
     balas.push(Bala)
+    st()
 }
 
 //criar inimigos
@@ -166,6 +194,7 @@ function Anima() {
         if (Math.abs(bala.position.x - inimigo.position.x) < 0.5 && Math.abs(bala.position.y - inimigo.position.y) < 0.5) {
             Cena.remove(bala)
             balas.splice(bindex, 1)
+            se()
             explodir (inimigo)
             inimigos.splice(index, 1)
             if (inimigos.length === 0 && !GameOver) {
@@ -185,6 +214,7 @@ function Anima() {
         GameOver = true
         telas.style.display = "flex"
         gameOver.style.display = "flex"
+        sgm()
         return
     }
 
