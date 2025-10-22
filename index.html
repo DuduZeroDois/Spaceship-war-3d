@@ -8,21 +8,25 @@
 </head>
 <body>
     <b><h1>SpaceShip War 3D v1.0</h1></b>
+
     <div id="hud">
         <h3 id="sc">Score: <span id="ponto">0</span></h3>
         <h3 id="lf">Lifes: <span id="vida">10</span></h3>
     </div>
+
     <div id="telas">
-        <div id="perdeu">
+        <div id="perdeu" style="display:none;">
             <h2 id="h2D">DEFEAT</h2>
-            <button onclick="reniciar()" id="resetD" class="Reset"> Reset </button>
+            <button onclick="reiniciar()" id="resetD" class="Reset">Reset</button>
         </div>
-        <div id="ganhou">
+        <div id="ganhou" style="display:none;">
             <h2 id="h2W">WINNER</h2>
-            <button onclick="reniciar()" id="resetW" class="Reset"> Reset </button>
+            <button onclick="reiniciar()" id="resetW" class="Reset">Reset</button>
         </div>
     </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
     <script src="main.js"></script>
 </body>
 </html>
